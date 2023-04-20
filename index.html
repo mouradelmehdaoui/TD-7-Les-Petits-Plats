@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
   <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <title>Les petits plats</title>
 </head>
@@ -24,7 +24,7 @@
   <section>
     <!-- Another variation with a button -->
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search this blog">
+      <input id="searchInput" type="text" class="form-control" placeholder="Search this blog">
       <div class="input-group-append">
         <button class="btn btn-secondary" type="button">
           <i class="fa fa-search"></i>
@@ -33,15 +33,38 @@
     </div>
   </section>
 
-  <section class="container-fluid">
-    <div class="card" style="width: 18rem;">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-          content.</p>
+  <section class="container">
+    <div class="row">
+      <div class="col-sm">
+        
+
+        <div class="btn-group">
+          <button class="btn btn-danger btn-lg" type="button">
+            Large split button
+          </button>
+          <button type="button" class="btn btn-lg btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
+          <div class="dropdown-menu">
+            ...
+          </div>
+
       </div>
     </div>
   </section>
+
+  <section class="container py-5">
+    <div class="card__container row row-cols-1 row-cols-md-3 g-4 py-5">
+
+    </div>
+
+  </section>
+
+
+  <script src="./shared/services/Recipes-service.js"></script>
+  <script type="module" src="./scripts/App.js"></script>
+  <script src="./views/RecipesCard.js"></script>
+  <script type="module" src="./scripts/utils/functions.js"></script>
 
 </body>
 

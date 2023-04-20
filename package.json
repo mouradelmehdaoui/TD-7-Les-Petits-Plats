@@ -1,5 +1,6 @@
 {
   "name": "td-7-les-petits-plats",
+  "type": "module",
   "version": "1.0.0",
   "description": "TD-7-Les-Petits-Plats ",
   "main": "index.js",
@@ -17,7 +18,9 @@
   },
   "homepage": "https://github.com/mouradelmehdaoui/TD-7-Les-Petits-Plats#readme",
   "dependencies": {
+    "babel": "^6.23.0",
     "bootstrap": "^5.0",
+    "node": "^19.8.1",
     "sass": "^1.62.0"
   }
 }
