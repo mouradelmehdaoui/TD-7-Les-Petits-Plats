@@ -1,0 +1,23 @@
+{
+  "name": "td-7-les-petits-plats",
+  "version": "1.0.0",
+  "description": "TD-7-Les-Petits-Plats ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mouradelmehdaoui/TD-7-Les-Petits-Plats.git"
+  },
+  "author": "Mourad El mehdaoui",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mouradelmehdaoui/TD-7-Les-Petits-Plats/issues"
+  },
+  "homepage": "https://github.com/mouradelmehdaoui/TD-7-Les-Petits-Plats#readme",
+  "dependencies": {
+    "bootstrap": "^5.0",
+    "sass": "^1.62.0"
+  }
+}
