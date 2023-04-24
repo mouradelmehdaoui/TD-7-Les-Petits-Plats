@@ -1,6 +1,7 @@
 class RecipesCard {
-  constructor(recipes) {
+  constructor(recipes, ingredients) {
     this.recipes = recipes;
+    this.ingredients = ingredients;
   }
 
   createCards() {
@@ -11,6 +12,7 @@ class RecipesCard {
     for (let recipe of this.recipes) {
 
       const { id, name, servings, time, description } = recipe;
+
       photographerTemplate = `
         <div class="col">
         <div class="card" style="width: 18rem;">
@@ -18,9 +20,10 @@ class RecipesCard {
         <div class="card-body">
         <h5 class="card-title">${name}</h5>
         <h5 class="card-title">${time} min</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-            content.</p>
+          <p class="card-text">${description}</p>
+          <p class="card-text"></p>
         </div>
+        <p id="card-ingredients"></p>
       </div>
       </div>
           `;
@@ -31,5 +34,22 @@ class RecipesCard {
     return photographerCards;
   }
 
+  createDropdown(ingredients) {
+
+    let dropDownTemplate = "";
+    let dropDownCards = "";
+
+    for (let ingredient of ingredients) {
+
+
+      dropDownTemplate = `
+        <li><a class="dropdown-item" href="#">${ingredient}</a></li>
+          `;
+
+          dropDownCards += dropDownTemplate;
+    }
+
+    return dropDownCards;
+  }
 
 }

@@ -39,23 +39,20 @@ class RecipesService extends Api {
     return await this.getAll()
   }
 
-  filterByInput(recettes) {
-    
-    let recipesFiltered = []
+  filterByInput(recipes, input, cardsContainer) {
 
-    const inputSearch = document.getElementById('searchInput');
     const myFunction = (e) => {
-      const enterValue =  e.target.value.toLowerCase()
-
-
-      if(enterValue.length >= 2) {
-       recipesFiltered = recettes.filter( value => value.name.includes(enterValue))
+      const enterValue = e.target.value.toLowerCase()
+      if (enterValue.length >= 2) {
+        const filteredRecipes = recipes.filter((recipe) => {
+          const nameMatch = recipe.name.toLowerCase().includes(enterValue);
+          const descriptionMatch = recipe.description.toLowerCase().includes(enterValue);
+          return nameMatch || descriptionMatch;
+        });
+        cardsContainer.innerHTML = new RecipesCard(filteredRecipes).createCards();
       }
-      return recipesFiltered
     }
-    inputSearch.addEventListener("input", myFunction);
-
+    input.addEventListener("input", myFunction);
   }
-
 }
 
