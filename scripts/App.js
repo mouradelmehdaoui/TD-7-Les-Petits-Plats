@@ -3,7 +3,7 @@ import { getAllAppliances, getAllIngredients, getAllUstensils } from '../scripts
 class App {
 
     constructor() {
-        this.$cardsContainer = document.querySelector(".card__container");
+        this.$cardsContainer = document.querySelector(".recipes-container");
         this.$dropDonwContainer = document.querySelector(".dropdown-option");
         this.$inputSearch = document.querySelector('.searchInput');
         this.ReceiptService = new RecipesService('../api/recipes.json')

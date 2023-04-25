@@ -1,1 +1,14 @@
 @import './variables.scss';
+
+@mixin recipe-card($gap) {
+margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $gap;
+}
+
+@mixin recipe-card-body($gab) {
+    display: flex;
+    flex-direction: column;
+    gap: $gab;
+    }

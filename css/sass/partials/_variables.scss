@@ -2,14 +2,13 @@
 $primary : #D04F4F;
 $secondary : #E7E7E7;
 $tertiary: #C7BEBE;
-$text-color-invoice: black;
+
 
  //Pixel variables
  $buttons-border-radius: 5px;
 
 //SASS Variables
 $body-bg-color: white;
-$color-global: white;
 
 $tab-shadow-color: rgb(228, 169, 59);
 
@@ -21,46 +20,18 @@ $buttons-color--active: white;
 $dropdown-ingredients-bg-color: #3282F7;
 $dropdown-ingredients-bg-color: #3282F7;
 $dropdown-ingredients-bg-color: #3282F7;
-$buttons-bg-color--hover: #DB8876;
-$buttons-bg-color--focus: #DB8876;
-$buttons-bg-color--active: "";
+
+$img-container-bg-color: $tertiary;
+$body-container-bg-color: $secondary;
+
 
 $text-color-primary: white;
-$text-color-secondary: $primary;
-$text-color-tertiary: black;
-$text-color-quaternary: $tertiary;
+$text-color-secondary: black;
 
-//For the photographers page
-$text-color-slogan: #525252;
-$text-color-invoice: black;
 
-$dialog-backdrop-bg-color: #c4c4c466;
-$dialog-bg-color: #DB8876;
-$dialog-shadow-color: #0a0a0a4d;
-$dialog-lightbox-backdrop-bg-color: #E5E5E5;
 
-$input-message-color: white;
-$input-bg-color--invalid: #430000;
-$input-outline-color--invalid: #bc0f0f;
 
-$input-bg-color--valid: #004300;
-$input-outline-color--valid: limegreen;
-//
 
-$bg-color-primary: $secondary;
-$bg-color-secondary: $primary;
-$bg-color-tertiary: black;
-$bg-color-quaternary: $tertiary;
 
-//For the scrollbar
-$scrollbar-bg-color: #f1f1f1;
-$scrollbar-thumb-bg-color: #c1c1c1;
-$scrollbar-thumb-bg-color--hover: #a8a8a8;
-$scrollbar-thumb-bg-color--active: #787878;
-//
 
-$odd-card-bg-color: #f1f1f1;
-
-$bg-color-likes-invoice: #DB8876;
-$bg-color-liked: $primary;
 

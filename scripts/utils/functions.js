@@ -10,8 +10,6 @@ const getAllIngredients = (recipes) => {
     return byMap.indexOf(ingredient) === index;
   });
 
-  console.log(uniqueIngredients2);
-
   const ingredients = new Set(); // use a set to avoid duplicates
   recipes.forEach((recipe) => {
     recipe.ingredients.forEach((ingredient) => {
@@ -19,7 +17,6 @@ const getAllIngredients = (recipes) => {
     });
   });
 
-  console.log(Array.from(ingredients));
   return Array.from(ingredients)
 }
 

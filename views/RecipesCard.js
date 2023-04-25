@@ -6,29 +6,37 @@ class RecipesCard {
 
   createCards() {
 
-    let photographerTemplate = "";
     let photographerCards = "";
 
     for (let recipe of this.recipes) {
 
-      const { id, name, servings, time, description } = recipe;
+      const { id, name, time, description } = recipe;
 
-      photographerTemplate = `
-        <div class="col">
-        <div class="card" style="width: 18rem;">
-        <img src="https://source.unsplash.com/random/200x200?sig=${id}" class="card-img-top" alt="...">
-        <div class="card-body">
-        <h5 class="card-title">${name}</h5>
-        <h5 class="card-title">${time} min</h5>
-          <p class="card-text">${description}</p>
-          <p class="card-text"></p>
+      photographerCards += `
+      <div class="recipes-card">
+        <div class="recipes__img"></div>
+        <div class="recipes__body">
+        <div class="recipes__header row">
+        <h5 class="recipes__title col">${name}</h5>
+        <h5 class="recipes__time col"><i class="fa-regular fa-clock me-2"></i>${time} min</h5>
         </div>
-        <p id="card-ingredients"></p>
-      </div>
-      </div>
+        <div class="recipes__instruction row">
+        <ul class="col">
           `;
+      for (let ingredient of recipe.ingredients) {
+        photographerCards += `
+        
+        <li class="recipes__ingredients">${ingredient.ingredient} - ${ingredient.quantity} ${ingredient.unit ? ingredient.unit : ''}</li>
+        `;
+      }
 
-      photographerCards += photographerTemplate;
+      photographerCards +=
+
+        `</ul>
+      <p class="recipes__description col">${description}</p>
+      </div>
+      </div>
+      </div>`;
     }
 
     return photographerCards;
@@ -36,17 +44,13 @@ class RecipesCard {
 
   createDropdown(ingredients) {
 
-    let dropDownTemplate = "";
     let dropDownCards = "";
 
     for (let ingredient of ingredients) {
 
-
-      dropDownTemplate = `
+      dropDownCards += `
         <li><a class="dropdown-item" href="#">${ingredient}</a></li>
           `;
-
-          dropDownCards += dropDownTemplate;
     }
 
     return dropDownCards;
