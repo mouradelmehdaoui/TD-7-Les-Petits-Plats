@@ -1,7 +1,9 @@
+
 class RecipesCard {
   constructor(recipes, ingredients) {
     this.recipes = recipes;
     this.ingredients = ingredients;
+
   }
 
   createCards() {
@@ -42,16 +44,41 @@ class RecipesCard {
     return photographerCards;
   }
 
-  createDropdown(ingredients) {
+  createDropdown(categorys, names) {
+
+
+    console.log(categorys);
+    const script = document.createElement('script');
+    script.src = "../scripts/utils/bundle.js";
+    script.type = "module";
+    script.async = true;
+    document.head.appendChild(script);
+
+    const nameTitle = names
+    const name = nameTitle.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
 
     let dropDownCards = "";
 
-    for (let ingredient of ingredients) {
+    dropDownCards += `
+    <div class="dropdown-menus-${name}">
+    ${nameTitle}
+    <div class="dropdown-arrow-${name}"> 
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+    <ul class="dropdown-option-${name}">
+    `
+    if (!Array.isArray(categorys)) {
+      throw new Error('categorys must be an array');
+    }
+    for (let category of categorys) {
 
       dropDownCards += `
-        <li><a class="dropdown-item" href="#">${ingredient}</a></li>
+        <li><a class="dropdown-item" href="#">${category}</a></li>
           `;
     }
+    dropDownCards += `
+    </ul>
+  </div>`
 
     return dropDownCards;
   }

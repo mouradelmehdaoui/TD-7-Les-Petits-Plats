@@ -94,8 +94,29 @@ header h1 {
 }
 
 /* DropDown CSS*/
-.dropdown-menus {
-  background-color: #3282F7;
+.dropdown-container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.dropdown-container .closed {
+  height: 50px;
+  display: grid;
+  grid-template-rows: repeat(auto-fill, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  height: auto !important;
+  max-height: 450px;
+}
+.dropdown-container .closed li {
+  display: flex;
+  justify-content: center;
+}
+.dropdown-container .closed li a {
+  font-size: 14px;
+  color: white;
+}
+.dropdown-container .dropdown-menus-ingredients, .dropdown-container .dropdown-menus-appareils, .dropdown-container .dropdown-menus-ustensiles {
   height: 80px;
   width: 180px;
   transition: width 350ms ease-out;
@@ -106,15 +127,7 @@ header h1 {
   color: white;
   padding: 10px;
 }
-.dropdown-menus .dropdown-arrow {
-  position: absolute;
-  top: 25px;
-  right: 15px;
-  transition: rotate 350ms ease-out;
-  cursor: pointer;
-  color: white;
-}
-.dropdown-menus .dropdown-option {
+.dropdown-container .dropdown-option-ingredients, .dropdown-container .dropdown-option-appareils, .dropdown-container .dropdown-option-ustensiles {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
@@ -128,28 +141,23 @@ header h1 {
   margin-top: -5px;
   z-index: 1;
   overflow-y: auto;
+  justify-items: center;
 }
-.dropdown-menus .dropdown-options-inactive {
-  height: 0 !important;
-  transition: width 450ms ease-out;
-  width: 0 !important;
-}
-.dropdown-menus .closed {
-  height: 50px;
-  display: grid;
-  grid-template-rows: repeat(auto-fill, 1fr);
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  height: auto !important;
-  max-height: 450px;
+.dropdown-container .dropdown-option-ingredients, .dropdown-container #dropdown-ingredients {
   background-color: #3282F7;
 }
-.dropdown-menus .closed li {
-  display: flex;
-  justify-content: center;
+.dropdown-container .dropdown-option-appareils, .dropdown-container #dropdown-appareils {
+  background-color: #68D9A4;
 }
-.dropdown-menus .closed li a {
-  font-size: 14px;
+.dropdown-container .dropdown-option-ustensiles, .dropdown-container #dropdown-ustensiles {
+  background-color: #ED6454;
+}
+.dropdown-container .dropdown-arrow-ingredients, .dropdown-container .dropdown-arrow-appareils, .dropdown-container .dropdown-arrow-ustensiles {
+  position: absolute;
+  top: 25px;
+  right: 15px;
+  transition: rotate 350ms ease-out;
+  cursor: pointer;
   color: white;
 }
 

@@ -19,72 +19,81 @@ header {
 
 /* DropDown CSS*/
 
-.dropdown-menus {
-    background-color: $dropdown-ingredients-bg-color;
-    height: 80px;
-    width: 180px;
-    transition: width 350ms ease-out;
-    position: relative;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    color: $text-color-primary;
-    padding: 10px;
+.dropdown-container{
+        display: flex;
+        justify-content: flex-start;
+        gap: 10px;
 
-
-    .dropdown-arrow {
-        position: absolute;
-        top: 25px;
-        right: 15px;
-        transition: rotate 350ms ease-out;
-        cursor: pointer;
-        color: $text-color-primary;
-    }
-
-    .dropdown-option {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 15px;
-        color: $text-color-primary;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        height: 0px;
-        transition: height 450ms ease-out;
-        margin-top: -5px;
-        z-index: 1;
-        overflow-y: auto;
-    }
-
-    .dropdown-options-inactive {
-        height: 0 !important;
-        transition: width 450ms ease-out;
-        width: 0 !important;
-    }
-
-    .closed {
-        height: 50px;
-        display: grid;
-        grid-template-rows: repeat(auto-fill, 1fr);
-        grid-template-columns: repeat(3, 1fr);
-        gap: 15px;
-        height: auto !important;
-        max-height: 450px;
-        background-color: $dropdown-ingredients-bg-color;
-
-        li {
-            display: flex;
-            justify-content: center;
-
-            a {
-                font-size: 14px;
-                color: $text-color-primary;
+        .closed {
+            height: 50px;
+            display: grid;
+            grid-template-rows: repeat(auto-fill, 1fr);
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            height: auto !important;
+            max-height: 450px;
+     
+    
+            li {
+                display: flex;
+                justify-content: center;
+    
+                a {
+                    font-size: 14px;
+                    color: $text-color-primary;
+                }
             }
         }
-    }
-}
 
+        .dropdown-menus-ingredients, .dropdown-menus-appareils, .dropdown-menus-ustensiles {
+
+            height: 80px;
+            width: 180px;
+            transition: width 350ms ease-out;
+            position: relative;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            color: $text-color-primary;
+            padding: 10px;;
+        }
+
+        .dropdown-option-ingredients, .dropdown-option-appareils, .dropdown-option-ustensiles {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            color: $text-color-primary;
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            height: 0px;
+            transition: height 450ms ease-out;
+            margin-top: -5px;
+            z-index: 1;
+            overflow-y: auto;
+            justify-items: center;
+        }
+
+        .dropdown-option-ingredients, #dropdown-ingredients{
+            background-color: $dropdown-ingredients-bg-color;
+        }
+        .dropdown-option-appareils, #dropdown-appareils{
+            background-color: $dropdown-appareils-bg-color;
+        }
+        .dropdown-option-ustensiles, #dropdown-ustensiles {
+            background-color: $dropdown-ustensiles-bg-color;
+        }
+        .dropdown-arrow-ingredients, .dropdown-arrow-appareils, .dropdown-arrow-ustensiles {
+            position: absolute;
+            top: 25px;
+            right: 15px;
+            transition: rotate 350ms ease-out;
+            cursor: pointer;
+            color: $text-color-primary;
+        }
+
+}
 .recipes-container {
     @include recipe-card(35px);
 

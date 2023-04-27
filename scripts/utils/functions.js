@@ -1,56 +1,27 @@
-const getAllIngredients = (recipes) => {
+const getAllRecipeInfo = (recipes) => {
+  const info = {
+    ingredients: new Set(),
+    ustensils: new Set(),
+    appliances: new Set(),
+  };
 
-  const byMap = []
-  recipes.map(recipe =>
-    recipe.ingredients.map(ingredient => byMap.push(ingredient.ingredient.toLowerCase()))
-  )
-  const uniqueIngredients = [...new Set(byMap)];
-
-  const uniqueIngredients2 = byMap.filter((ingredient, index) => {
-    return byMap.indexOf(ingredient) === index;
-  });
-
-  const ingredients = new Set(); // use a set to avoid duplicates
   recipes.forEach((recipe) => {
     recipe.ingredients.forEach((ingredient) => {
-      ingredients.add(ingredient.ingredient.toLowerCase());
+      info.ingredients.add(ingredient.ingredient.toLowerCase());
     });
-  });
 
-  return Array.from(ingredients)
-}
-
-
-const getAllUstensils = (recipes) => {
-
-  const allUstensils = new Set();
-  recipes.forEach(recipe => {
-    recipe.ustensils.forEach(ustensil => {
-      allUstensils.add(ustensil);
-
+    recipe.ustensils.forEach((ustensil) => {
+      info.ustensils.add(ustensil);
     });
+
+    info.appliances.add(recipe.appliance);
   });
-  return [...allUstensils]
-}
 
-const getAllAppliances = (recipes) => {
+  return {
+    ingredients: [...info.ingredients],
+    ustensils: [...info.ustensils],
+    appliances: [...info.appliances],
+  };
+};
 
-  const allAppliances = new Set();
-  recipes.forEach(recipe => {
-    allAppliances.add(recipe.appliance);
-  });
-  return [...allAppliances]
-}
-
-export { getAllAppliances, getAllIngredients, getAllUstensils }
-
-
-
-// const arr =  ["a" , "b" , "c" , "a" ,"b" , "y"];
-
-// const ok = arr.filter( (x, index) => arr.indexOf(x) === index)
-
-// const ok2 = [... new Set(arr)]
-
-// console.log(ok)
-// console.log(ok2)
+export default getAllRecipeInfo
