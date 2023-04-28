@@ -9,7 +9,7 @@ class App {
         this.$dropDonwAppareils = document.getElementById("dropdown-appareils");
         this.$dropDonwUstensiles = document.getElementById("dropdown-ustensiles");
         this.$inputSearch = document.querySelector('.searchInput');
-        this.ReceiptService = new RecipesService('../api/recipes.json')
+        this.ReceiptService = new RecipesService('../data/recipes.json')
     }
 
     async main() {
