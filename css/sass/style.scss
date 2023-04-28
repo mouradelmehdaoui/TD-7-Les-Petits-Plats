@@ -15,6 +15,10 @@ header {
     .searchInput {
         background-color: $secondary;
     }
+    .input-group-text{
+        background-color: #E7E7E7 !important;
+    height: 74px!important;
+    }
 }
 
 /* DropDown CSS*/
@@ -77,12 +81,15 @@ header {
 
         .dropdown-option-ingredients, #dropdown-ingredients{
             background-color: $dropdown-ingredients-bg-color;
+            border-radius: 5px;
         }
         .dropdown-option-appareils, #dropdown-appareils{
             background-color: $dropdown-appareils-bg-color;
+            border-radius: 5px;
         }
         .dropdown-option-ustensiles, #dropdown-ustensiles {
             background-color: $dropdown-ustensiles-bg-color;
+            border-radius: 5px;
         }
         .dropdown-arrow-ingredients, .dropdown-arrow-appareils, .dropdown-arrow-ustensiles {
             position: absolute;

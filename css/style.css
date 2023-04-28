@@ -92,6 +92,10 @@ header h1 {
 #inputSearch .searchInput {
   background-color: #E7E7E7;
 }
+#inputSearch .input-group-text {
+  background-color: #E7E7E7 !important;
+  height: 74px !important;
+}
 
 /* DropDown CSS*/
 .dropdown-container {
@@ -145,12 +149,15 @@ header h1 {
 }
 .dropdown-container .dropdown-option-ingredients, .dropdown-container #dropdown-ingredients {
   background-color: #3282F7;
+  border-radius: 5px;
 }
 .dropdown-container .dropdown-option-appareils, .dropdown-container #dropdown-appareils {
   background-color: #68D9A4;
+  border-radius: 5px;
 }
 .dropdown-container .dropdown-option-ustensiles, .dropdown-container #dropdown-ustensiles {
   background-color: #ED6454;
+  border-radius: 5px;
 }
 .dropdown-container .dropdown-arrow-ingredients, .dropdown-container .dropdown-arrow-appareils, .dropdown-container .dropdown-arrow-ustensiles {
   position: absolute;
