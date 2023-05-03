@@ -14,6 +14,8 @@ class App {
 
     async main() {
 
+        console.log('je suis dans main de App');
+
         const allRecipes = await this.ReceiptService.getAllReceipts()
         this.$cardsContainer.innerHTML = new RecipesCard(allRecipes).createCards();
         this.ReceiptService.filterByInput(allRecipes, this.$inputSearch, this.$cardsContainer)

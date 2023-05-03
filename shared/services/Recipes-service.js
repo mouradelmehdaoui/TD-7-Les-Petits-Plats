@@ -17,7 +17,6 @@ class Api {
         throw new Error(`Erreur HTTP : ${response.status}`);
       }
       const data = await response.json()
-
       return data
 
     }
@@ -47,6 +46,7 @@ class RecipesService extends Api {
         const filteredRecipes = recipes.filter((recipe) => {
           const nameMatch = recipe.name.toLowerCase().includes(enterValue);
           const descriptionMatch = recipe.description.toLowerCase().includes(enterValue);
+          // indexoff avec recipes.json
           return nameMatch || descriptionMatch;
         });
         cardsContainer.innerHTML = new RecipesCard(filteredRecipes).createCards();

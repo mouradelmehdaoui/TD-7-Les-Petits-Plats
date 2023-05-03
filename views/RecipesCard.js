@@ -61,7 +61,7 @@ class RecipesCard {
 
     dropDownCards += `
     <div class="dropdown-menus-${name}">
-    ${nameTitle}
+   <p class="dropdown-title-${name}">${nameTitle}</p>
     <div class="dropdown-arrow-${name}"> 
       <i class="fa-solid fa-chevron-down"></i>
     </div>

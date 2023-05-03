@@ -121,8 +121,8 @@ header h1 {
   color: white;
 }
 .dropdown-container .dropdown-menus-ingredients, .dropdown-container .dropdown-menus-appareils, .dropdown-container .dropdown-menus-ustensiles {
-  height: 80px;
-  width: 180px;
+  height: 69px;
+  width: 170px;
   transition: width 350ms ease-out;
   position: relative;
   display: flex;
@@ -166,6 +166,22 @@ header h1 {
   transition: rotate 350ms ease-out;
   cursor: pointer;
   color: white;
+}
+.dropdown-container .dropdown-title-ingredients, .dropdown-container .dropdown-title-appareils, .dropdown-container .dropdown-title-ustensiles {
+  border: none;
+  outline: none;
+  background: none;
+  text-align: left;
+  font-size: 16px;
+  padding: 10px 0 0 25px;
+  width: 90%;
+  height: 90%;
+  color: white;
+}
+.dropdown-container input::-webkit-input-placeholder {
+  color: white; /*Change the placeholder color*/
+  opacity: 0.5; /*Change the opacity between 0 and 1*/
+  font-weight: 700;
 }
 
 .recipes-container {
