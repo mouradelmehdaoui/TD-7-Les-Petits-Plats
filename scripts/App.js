@@ -9,7 +9,8 @@ class App {
         this.$dropDonwAppareils = document.getElementById("dropdown-appareils");
         this.$dropDonwUstensiles = document.getElementById("dropdown-ustensiles");
         this.$inputSearch = document.querySelector('.searchInput');
-        this.ReceiptService = new RecipesService('../data/recipes.json')
+        this.ReceiptService = new RecipesService(window.location.href+'/data/recipes.json')
+
     }
 
     async main() {
@@ -35,6 +36,7 @@ class App {
 }
 
 const app = new App()
+
 app.main()
 
 
