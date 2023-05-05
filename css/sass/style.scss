@@ -14,111 +14,126 @@ header {
     .searchInput {
         background-color: $secondary;
     }
-    .input-group-text{
+
+    .input-group-text {
         background-color: #E7E7E7 !important;
-    height: 74px!important;
+        height: 74px !important;
     }
 }
 
 /* DropDown CSS*/
 
-.dropdown-container{
-        display: flex;
-        justify-content: flex-start;
-        gap: 10px;
+.dropdown-container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
 
-        .closed {
-            height: 50px;
-            display: grid;
-            grid-template-rows: repeat(auto-fill, 1fr);
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            height: auto !important;
-            max-height: 450px;
-     
-    
-            li {
-                display: flex;
-                justify-content: center;
-    
-                a {
-                    font-size: 14px;
-                    color: $text-color-primary;
-                }
+    .closed {
+        height: 50px;
+        display: grid;
+        grid-template-rows: repeat(auto-fill, 1fr);
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        height: auto !important;
+        max-height: 450px;
+
+        li {
+            margin-left: 15px;
+
+            a {
+                font-size: 14px;
+                color: $text-color-primary;
             }
         }
+    }
 
-        .dropdown-menus-ingredients, .dropdown-menus-appareils, .dropdown-menus-ustensiles {
+    .dropdown-menus-ingredients,
+    .dropdown-menus-appareils,
+    .dropdown-menus-ustensiles {
 
-            height: 69px;
-            width: 170px;
-            transition: width 350ms ease-out;
-            position: relative;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            color: $text-color-primary;
-            padding: 10px;;
-        }
+        height: 69px;
+        width: 170px;
+        transition: width 350ms ease-out;
+        position: relative;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        color: $text-color-primary;
+        padding: 10px;
+        ;
+    }
 
-        .dropdown-option-ingredients, .dropdown-option-appareils, .dropdown-option-ustensiles {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            color: $text-color-primary;
-            position: absolute;
-            top: 70px;
-            left: 0;
-            width: 100%;
-            height: 0px;
-            transition: height 450ms ease-out;
-            margin-top: -5px;
-            z-index: 1;
-            overflow-y: auto;
-            justify-items: center;
-        }
+    .dropdown-option-ingredients,
+    .dropdown-option-appareils,
+    .dropdown-option-ustensiles {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        color: $text-color-primary;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        height: 0px;
+        transition: height 450ms ease-out;
+        margin-top: -5px;
+        z-index: 1;
+        overflow-y: auto;
+    }
 
-        .dropdown-option-ingredients, #dropdown-ingredients{
-            background-color: $dropdown-ingredients-bg-color;
-            border-radius: 5px;
-        }
-        .dropdown-option-appareils, #dropdown-appareils{
-            background-color: $dropdown-appareils-bg-color;
-            border-radius: 5px;
-        }
-        .dropdown-option-ustensiles, #dropdown-ustensiles {
-            background-color: $dropdown-ustensiles-bg-color;
-            border-radius: 5px;
-        }
-        .dropdown-arrow-ingredients, .dropdown-arrow-appareils, .dropdown-arrow-ustensiles {
-            position: absolute;
-            top: 25px;
-            right: 15px;
-            transition: rotate 350ms ease-out;
-            cursor: pointer;
-            color: $text-color-primary;
-        }
+    .dropdown-option-ingredients,
+    #dropdown-ingredients {
+        background-color: $dropdown-ingredients-bg-color;
+        border-radius: 5px;
+    }
 
-        .dropdown-title-ingredients, .dropdown-title-appareils, .dropdown-title-ustensiles{
-            border: none;
-            outline: none;
-            background: none;
-            text-align: left;
-            font-size: 16px;
-            padding: 10px 0 0 25px;
-            width: 90%;
-            height: 90%;
-            color: white;
- 
-            
-        }
+    .dropdown-option-appareils,
+    #dropdown-appareils {
+        background-color: $dropdown-appareils-bg-color;
+        border-radius: 5px;
+    }
 
-          input::-webkit-input-placeholder {
-            color: white; /*Change the placeholder color*/
-            opacity: 0.5; /*Change the opacity between 0 and 1*/
-            font-weight: 700;
-       }
+    .dropdown-option-ustensiles,
+    #dropdown-ustensiles {
+        background-color: $dropdown-ustensiles-bg-color;
+        border-radius: 5px;
+    }
+
+    .dropdown-arrow-ingredients,
+    .dropdown-arrow-appareils,
+    .dropdown-arrow-ustensiles {
+        position: absolute;
+        top: 25px;
+        right: 15px;
+        transition: rotate 350ms ease-out;
+        cursor: pointer;
+        color: $text-color-primary;
+    }
+
+    .dropdown-title-ingredients,
+    .dropdown-title-appareils,
+    .dropdown-title-ustensiles {
+        border: none;
+        outline: none;
+        background: none;
+        text-align: left;
+        font-size: 16px;
+        padding: 10px 0 0 25px;
+        width: 90%;
+        height: 90%;
+        color: white;
+
+    }
+
+    input::-webkit-input-placeholder {
+        color: white;
+        /*Change the placeholder color*/
+        opacity: 0.5;
+        /*Change the opacity between 0 and 1*/
+        font-weight: 700;
+    }
 }
+
 .recipes-container {
     @include recipe-card(35px);
 
@@ -165,9 +180,9 @@ header {
 }
 
 .expend {
-    width: 650px !important;
+    width: 667px !important;
 }
 
-.container-fluid{
+.container-fluid {
     --bs-gutter-x: 9.5rem !important;
 }

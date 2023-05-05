@@ -46,8 +46,6 @@ class RecipesCard {
 
   createDropdown(categorys, names) {
 
-
-    console.log(categorys);
     const script = document.createElement('script');
     script.src = "../scripts/utils/bundle.js";
     script.type = "module";

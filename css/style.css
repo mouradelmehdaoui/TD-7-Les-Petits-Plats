@@ -113,14 +113,15 @@ header h1 {
   max-height: 450px;
 }
 .dropdown-container .closed li {
-  display: flex;
-  justify-content: center;
+  margin-left: 15px;
 }
 .dropdown-container .closed li a {
   font-size: 14px;
   color: white;
 }
-.dropdown-container .dropdown-menus-ingredients, .dropdown-container .dropdown-menus-appareils, .dropdown-container .dropdown-menus-ustensiles {
+.dropdown-container .dropdown-menus-ingredients,
+.dropdown-container .dropdown-menus-appareils,
+.dropdown-container .dropdown-menus-ustensiles {
   height: 69px;
   width: 170px;
   transition: width 350ms ease-out;
@@ -131,7 +132,9 @@ header h1 {
   color: white;
   padding: 10px;
 }
-.dropdown-container .dropdown-option-ingredients, .dropdown-container .dropdown-option-appareils, .dropdown-container .dropdown-option-ustensiles {
+.dropdown-container .dropdown-option-ingredients,
+.dropdown-container .dropdown-option-appareils,
+.dropdown-container .dropdown-option-ustensiles {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
@@ -145,21 +148,25 @@ header h1 {
   margin-top: -5px;
   z-index: 1;
   overflow-y: auto;
-  justify-items: center;
 }
-.dropdown-container .dropdown-option-ingredients, .dropdown-container #dropdown-ingredients {
+.dropdown-container .dropdown-option-ingredients,
+.dropdown-container #dropdown-ingredients {
   background-color: #3282F7;
   border-radius: 5px;
 }
-.dropdown-container .dropdown-option-appareils, .dropdown-container #dropdown-appareils {
+.dropdown-container .dropdown-option-appareils,
+.dropdown-container #dropdown-appareils {
   background-color: #68D9A4;
   border-radius: 5px;
 }
-.dropdown-container .dropdown-option-ustensiles, .dropdown-container #dropdown-ustensiles {
+.dropdown-container .dropdown-option-ustensiles,
+.dropdown-container #dropdown-ustensiles {
   background-color: #ED6454;
   border-radius: 5px;
 }
-.dropdown-container .dropdown-arrow-ingredients, .dropdown-container .dropdown-arrow-appareils, .dropdown-container .dropdown-arrow-ustensiles {
+.dropdown-container .dropdown-arrow-ingredients,
+.dropdown-container .dropdown-arrow-appareils,
+.dropdown-container .dropdown-arrow-ustensiles {
   position: absolute;
   top: 25px;
   right: 15px;
@@ -167,7 +174,9 @@ header h1 {
   cursor: pointer;
   color: white;
 }
-.dropdown-container .dropdown-title-ingredients, .dropdown-container .dropdown-title-appareils, .dropdown-container .dropdown-title-ustensiles {
+.dropdown-container .dropdown-title-ingredients,
+.dropdown-container .dropdown-title-appareils,
+.dropdown-container .dropdown-title-ustensiles {
   border: none;
   outline: none;
   background: none;
@@ -179,8 +188,10 @@ header h1 {
   color: white;
 }
 .dropdown-container input::-webkit-input-placeholder {
-  color: white; /*Change the placeholder color*/
-  opacity: 0.5; /*Change the opacity between 0 and 1*/
+  color: white;
+  /*Change the placeholder color*/
+  opacity: 0.5;
+  /*Change the opacity between 0 and 1*/
   font-weight: 700;
 }
 
@@ -227,7 +238,7 @@ header h1 {
 }
 
 .expend {
-  width: 650px !important;
+  width: 667px !important;
 }
 
 .container-fluid {

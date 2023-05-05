@@ -1,5 +1,6 @@
 import getAllRecipeInfo from '../scripts/utils/functions.js'
 import toggleCategory from '../scripts/utils/bundle.js'
+import filtered from '../scripts/utils/filtered.js'
 
 class App {
 
@@ -9,27 +10,26 @@ class App {
         this.$dropDonwAppareils = document.getElementById("dropdown-appareils");
         this.$dropDonwUstensiles = document.getElementById("dropdown-ustensiles");
         this.$inputSearch = document.querySelector('.searchInput');
-        this.ReceiptService = new RecipesService(window.location.href+'/data/recipes.json')
+        this.ReceiptService = new RecipesService(window.location.href + '/data/recipes.json')
 
     }
 
     async main() {
 
-        console.log('je suis dans main de App');
-
         const allRecipes = await this.ReceiptService.getAllReceipts()
         this.$cardsContainer.innerHTML = new RecipesCard(allRecipes).createCards();
         this.ReceiptService.filterByInput(allRecipes, this.$inputSearch, this.$cardsContainer)
 
-        const { ingredients, ustensils, appliances } = getAllRecipeInfo(allRecipes);
+        const { ingredients, appliances, ustensils } = getAllRecipeInfo(allRecipes);
+        filtered(allRecipes);
 
         [this.$dropDonwIngredients, this.$dropDonwAppareils, this.$dropDonwUstensiles]
             .forEach(($el, i) => {
                 $el.innerHTML = new RecipesCard(allRecipes)
-                    .createDropdown([ingredients, ustensils, appliances][i],
+                    .createDropdown([ingredients, appliances, ustensils][i],
                         ['Ingrédients', 'Appareils', 'Ustensiles'][i]);
             });
-        ['ingredients', 'ustensiles', 'appareils'].forEach((category) => { toggleCategory(category); });
+        ['ingredients', 'appareils', 'ustensiles'].forEach((category) => { toggleCategory(category); });
 
     }
 

@@ -19,7 +19,6 @@ const toggleCategory = (category) => {
     } else {
       dropdownInput.replaceWith(dropdownTitle);;
     }
-
   })
 
 }
