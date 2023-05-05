@@ -18,7 +18,7 @@ class App {
 
         const allRecipes = await this.ReceiptService.getAllReceipts()
         this.$cardsContainer.innerHTML = new RecipesCard(allRecipes).createCards();
-        this.ReceiptService.filterByInput(allRecipes, this.$inputSearch, this.$cardsContainer)
+        RecipesService.filterByInput(allRecipes, this.$inputSearch, this.$cardsContainer)
 
         const { ingredients, appliances, ustensils } = getAllRecipeInfo(allRecipes);
         filtered(allRecipes);
@@ -36,7 +36,6 @@ class App {
 }
 
 const app = new App()
-
 app.main()
 
 

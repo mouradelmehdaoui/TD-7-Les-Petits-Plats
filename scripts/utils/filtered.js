@@ -3,6 +3,7 @@ import getAllRecipeInfo from './functions.js'
 
 const filtered = (recipes) => {
     const { ingredients, ustensils, appliances } = getAllRecipeInfo(recipes);
+    const cardsContainer = document.querySelector(".recipes-container");
 
     const handleDropdownChange = (event) => {
         const dropdownClass = event.target.classList.value;
@@ -31,7 +32,7 @@ const filtered = (recipes) => {
                 });
                 break;
             default:
-                console.error(`Unknown dropdown type: ${dropdownType}`);
+                RecipesService.filterByInput(recipes, cardsContainer)
                 return;
         }
 

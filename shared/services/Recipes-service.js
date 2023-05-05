@@ -38,7 +38,7 @@ class RecipesService extends Api {
     return await this.getAll()
   }
 
-  filterByInput(recipes, input, cardsContainer) {
+  static filterByInput(recipes, input, cardsContainer) {
 
     const myFunction = (e) => {
       const enterValue = e.target.value.toLowerCase()
