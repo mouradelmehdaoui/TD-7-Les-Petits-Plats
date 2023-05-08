@@ -28,7 +28,9 @@ class RecipesCard {
       for (let ingredient of recipe.ingredients) {
         photographerCards += `
         
-        <li class="recipes__ingredients">${ingredient.ingredient} - ${ingredient.quantity} ${ingredient.unit ? ingredient.unit : ''}</li>
+        <li class="recipes__ingredients">${ingredient.ingredient} - 
+        ${ingredient.quantity ? ingredient.quantity : ''} 
+        ${ingredient.unit ? ingredient.unit : ''}</li>
         `;
       }
 
@@ -71,7 +73,7 @@ class RecipesCard {
     for (let category of categorys) {
 
       dropDownCards += `
-        <li><a class="dropdown-item" href="#">${category}</a></li>
+        <li class="dropdown-item-${name}">${category}</li>
           `;
     }
     dropDownCards += `

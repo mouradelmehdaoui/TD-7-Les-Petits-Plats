@@ -46,8 +46,9 @@ class RecipesService extends Api {
         const filteredRecipes = recipes.filter((recipe) => {
           const nameMatch = recipe.name.toLowerCase().includes(enterValue);
           const descriptionMatch = recipe.description.toLowerCase().includes(enterValue);
-          // indexoff avec recipes.json
-          return nameMatch || descriptionMatch;
+          const ingredientMatches =
+            recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(enterValue));
+          return nameMatch || descriptionMatch || ingredientMatches;
         });
         cardsContainer.innerHTML = new RecipesCard(filteredRecipes).createCards();
       }
