@@ -141,7 +141,11 @@ header {
   padding: 10px;
   display: none;
   border-radius: 5px;
+  width: max-content;
 
+  #tags-value {
+    width: auto;
+  }
   .tags-closed {
     cursor: pointer;
   }

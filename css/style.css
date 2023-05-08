@@ -205,6 +205,10 @@ header h1 {
   padding: 10px;
   display: none;
   border-radius: 5px;
+  width: max-content;
+}
+.tags-container #tags-value {
+  width: auto;
 }
 .tags-container .tags-closed {
   cursor: pointer;
