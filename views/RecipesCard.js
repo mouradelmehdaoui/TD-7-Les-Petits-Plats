@@ -9,6 +9,8 @@ class RecipesCard {
   createCards() {
 
     let photographerCards = "";
+    const error = `<p class="text-center fw-bold">« Aucune recette ne correspond à votre critère... vous pouvez"
+     "chercher « tarte aux pommes », « poisson », etc. </p>`
 
     for (let recipe of this.recipes) {
 
@@ -42,8 +44,8 @@ class RecipesCard {
       </div>
       </div>`;
     }
-
-    return photographerCards;
+    return photographerCards || error;
+   
   }
 
   createDropdown(categorys, names) {
