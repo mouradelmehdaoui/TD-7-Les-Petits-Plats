@@ -51,6 +51,7 @@ class RecipesService extends Api {
 
           return nameMatch || descriptionMatch || ingredientMatches;
         });
+
         cardsContainer.innerHTML = new RecipesCard(filteredRecipes).createCards();
       }
     }

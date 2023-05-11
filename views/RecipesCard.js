@@ -7,45 +7,40 @@ class RecipesCard {
   }
 
   createCards() {
-
-    let photographerCards = "";
     const error = `<p class="text-center fw-bold">« Aucune recette ne correspond à votre critère... vous pouvez"
-     "chercher « tarte aux pommes », « poisson », etc. </p>`
+    "chercher « tarte aux pommes », « poisson », etc. </p>`;
 
-    for (let recipe of this.recipes) {
-
+    const photographerCards = this.recipes.map((recipe) => {
       const { id, name, time, description } = recipe;
 
-      photographerCards += `
-      <div class="recipes-card">
-        <div class="recipes__img"></div>
-        <div class="recipes__body">
-        <div class="recipes__header row">
-        <h5 class="recipes__title col">${name}</h5>
-        <h5 class="recipes__time col"><i class="fa-regular fa-clock me-2"></i>${time} min</h5>
-        </div>
-        <div class="recipes__instruction row">
-        <ul class="col">
-          `;
-      for (let ingredient of recipe.ingredients) {
-        photographerCards += `
-        
+      let ingredientsList = recipe.ingredients.map((ingredient) => {
+        return `
         <li class="recipes__ingredients">${ingredient.ingredient} - 
         ${ingredient.quantity ? ingredient.quantity : ''} 
         ${ingredient.unit ? ingredient.unit : ''}</li>
-        `;
-      }
+      `;
+      }).join('');
 
-      photographerCards +=
+      return `
+      <div class="recipes-card">
+        <div class="recipes__img"></div>
+        <div class="recipes__body">
+          <div class="recipes__header row">
+            <h5 class="recipes__title col">${name}</h5>
+            <h5 class="recipes__time col"><i class="fa-regular fa-clock me-2"></i>${time} min</h5>
+          </div>
+          <div class="recipes__instruction row">
+            <ul class="col">
+              ${ingredientsList}
+            </ul>
+            <p class="recipes__description col">${description}</p>
+          </div>
+        </div>
+      </div>
+    `;
+    }).join('');
 
-        `</ul>
-      <p class="recipes__description col">${description}</p>
-      </div>
-      </div>
-      </div>`;
-    }
     return photographerCards || error;
-   
   }
 
   createDropdown(categorys, names) {
