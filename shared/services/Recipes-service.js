@@ -38,19 +38,23 @@ class RecipesService extends Api {
     return await this.getAll()
   }
 
-  static filterByInput(recipes, input, cardsContainer) {
 
+  static filterByInput(recipes, input, cardsContainer) {
     const myFunction = (e) => {
-      const enterValue = e.target.value.toLowerCase()
+      const enterValue = e.target.value.toLowerCase();
       if (enterValue.length >= 2) {
-        const filteredRecipes = recipes.filter((recipe) => {
+        const filteredRecipes = [];
+        for (let i = 0; i < recipes.length; i++) {
+          const recipe = recipes[i];
           const nameMatch = recipe.name.toLowerCase().includes(enterValue);
           const descriptionMatch = recipe.description.toLowerCase().includes(enterValue);
-          const ingredientMatches =
-            recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(enterValue));
+          const ingredientMatches = recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(enterValue));
 
-          return nameMatch || descriptionMatch || ingredientMatches;
-        });
+          if (nameMatch || descriptionMatch || ingredientMatches) {
+            filteredRecipes.push(recipe);
+          }
+        }
+
         cardsContainer.innerHTML = new RecipesCard(filteredRecipes).createCards();
       }
     }
