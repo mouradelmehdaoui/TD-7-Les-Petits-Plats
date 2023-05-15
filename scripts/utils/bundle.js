@@ -9,6 +9,7 @@ const toggleCategory = (category) => {
   dropdownInput.autofocus = true;
 
   dropdownArrow.addEventListener('click', () => {
+    
     const isOpen = dropdownArrow.classList.contains('open')
     dropDwonClosed.classList.toggle('closed')
     dropdownArrow.classList.toggle('open')

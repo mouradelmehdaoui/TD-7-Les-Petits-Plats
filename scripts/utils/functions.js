@@ -1,4 +1,4 @@
-const getAllRecipeInfo = (recipes) => {
+export function getAllRecipeInfo (recipes) {
 
   const info = {
     ingredients: new Set(),
@@ -25,4 +25,14 @@ const getAllRecipeInfo = (recipes) => {
   };
 };
 
-export default getAllRecipeInfo
+export function recipesFound(array) {
+  const result = document.querySelector(".recipes-found-paragraph");
+
+  if (array.length > 0) {
+    result.innerHTML = `Résultat trouvé(s):<span class="fw-bold"> ${array.length}</span>`;
+    result.classList.remove("hide");
+  } else {
+    result.classList.add("hide");
+  }
+}
+

@@ -1,4 +1,5 @@
-import getAllRecipeInfo from "../../scripts/utils/functions.js";
+import  {getAllRecipeInfo} from "../../scripts/utils/functions.js";
+import  {recipesFound} from "../../scripts/utils/functions.js";
 
 class Api {
 
@@ -53,7 +54,9 @@ class RecipesService extends Api {
 
         cardsContainer.innerHTML = new RecipesCard(filteredRecipes).createCards();
         this.handleDropdownChange(filteredRecipes)
+        recipesFound(filteredRecipes);
       } else {
+        recipesFound(recipes);
         this.handleDropdownChange(recipes)
       }
     }
