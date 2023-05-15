@@ -1,6 +1,8 @@
 import getAllRecipeInfo from '../scripts/utils/functions.js'
 import toggleCategory from '../scripts/utils/bundle.js'
 import filtered from '../scripts/utils/filtered.js'
+import RecipesService  from "../shared/services/Recipes-service.js";
+
 
 class App {
 

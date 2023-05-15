@@ -1,4 +1,5 @@
 import getAllRecipeInfo from './functions.js'
+import RecipesService  from "../../shared/services/Recipes-service.js";
 
 const filtered = (recipes) => {
     const { ingredients, appliances, ustensils } = getAllRecipeInfo(recipes);

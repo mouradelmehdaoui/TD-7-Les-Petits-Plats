@@ -1,3 +1,4 @@
+import getAllRecipeInfo from "../../scripts/utils/functions.js";
 
 class Api {
 
@@ -55,41 +56,13 @@ class RecipesService extends Api {
       } else {
         this.handleDropdownChange(recipes)
       }
-
     }
     input.addEventListener("input", myFunction);
 
   }
 
-  static getAllRecipeInfo(recipes) {
-
-    const info = {
-      ingredients: new Set(),
-      ustensils: new Set(),
-      appliances: new Set(),
-    };
-
-    recipes.forEach((recipe) => {
-      recipe.ingredients.forEach((ingredient) => {
-        info.ingredients.add(ingredient.ingredient.toLowerCase());
-      });
-  
-      recipe.ustensils.forEach((ustensil) => {
-        info.ustensils.add(ustensil.toLowerCase());
-      });
-  
-      info.appliances.add(recipe.appliance.toLowerCase());
-    });
-
-    return {
-      ingredients: [...info.ingredients],
-      ustensils: [...info.ustensils],
-      appliances: [...info.appliances],
-    };
-  };
-
   static handleDropdownChange(filteredRecipes) {
-    const { ingredients, ustensils, appliances } = this.getAllRecipeInfo(filteredRecipes);
+    const { ingredients, ustensils, appliances } = getAllRecipeInfo(filteredRecipes);
     const categories = ['ingredients', 'appareils', 'ustensiles'];
 
     categories.forEach(category => {
@@ -116,4 +89,6 @@ class RecipesService extends Api {
   }
 
 }
+
+export default RecipesService;
 
