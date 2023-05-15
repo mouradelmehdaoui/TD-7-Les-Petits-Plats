@@ -1,11 +1,12 @@
-import getAllRecipeInfo from './functions.js'
-import RecipesService  from "../../shared/services/Recipes-service.js";
+import {getAllRecipeInfo} from './functions.js';
+import  {recipesFound} from "../../scripts/utils/functions.js";
+import RecipesService from "../../shared/services/Recipes-service.js";
 
 const filtered = (recipes) => {
     const { ingredients, appliances, ustensils } = getAllRecipeInfo(recipes);
     const cardsContainer = document.querySelector(".recipes-container");
-
-    console.log(ustensils);
+    let counterTag = 0;
+    let filteredRecipes = []
 
     const handleDropdownChange = (event) => {
 
@@ -74,25 +75,39 @@ const filtered = (recipes) => {
             tagElement.style.backgroundColor = colors[dropdownType];
         }
 
-        const filteredRecipes = recipes.filter((recipe) => {
-            const fields = [recipe.name, recipe.description].map((field) =>
-                field.toLowerCase()
-            );
+        const recipesOrfilteredRecipes = counterTag === 0 ? recipes : filteredRecipes
+
+        filteredRecipes = recipesOrfilteredRecipes.filter((recipe) => {
+            // const fields = [recipe.name, recipe.description].map((field) =>
+            //     field.toLowerCase()
+            // );
             const ingredientMatches = recipe.ingredients.some((ingredient) =>
                 ingredient.ingredient.toLowerCase().includes(valueClicked)
             );
+            const appliancestMatches = recipe.appliance.toLowerCase().includes(valueClicked);
+
             const ustensilstMatches = recipe.ustensils.some((ustensil) =>
                 ustensil.toLowerCase().includes(valueClicked)
             );
-            return fields.some((field) => field.includes(valueClicked)) || ingredientMatches || ustensilstMatches;
+            //return fields.some((field) => field.includes(valueClicked)) || ingredientMatches || ustensilstMatches || appliancestMatches;
+            return ingredientMatches || ustensilstMatches || appliancestMatches;
+          
         });
 
+        counterTag++;
         cardsContainer.innerHTML = new RecipesCard(filteredRecipes).createCards();
-
+        RecipesService.handleDropdownChange(filteredRecipes)
+        recipesFound(filteredRecipes);
+       
         tagClosed.addEventListener("click", () => {
+            counterTag--;
             tagElement.remove();
-            cardsContainer.innerHTML = new RecipesCard(recipes).createCards();
+            cardsContainer.innerHTML = new RecipesCard(recipesOrfilteredRecipes).createCards();
+            RecipesService.handleDropdownChange(recipesOrfilteredRecipes)
+            recipesFound(recipesOrfilteredRecipes);
         });
+
+        console.log(counterTag);
     };
 
     document.addEventListener("input", handleDropdownChange);

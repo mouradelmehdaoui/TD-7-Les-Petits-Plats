@@ -134,6 +134,7 @@ header {
 
   display: flex;
   gap: 20px;
+
   .tags-item {
     max-width: 300px;
     display: flex;
@@ -212,4 +213,8 @@ header {
 
 .container-fluid {
   --bs-gutter-x: 9.5rem !important;
+}
+
+.hide {
+  display: none !important;
 }
