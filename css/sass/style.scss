@@ -130,25 +130,31 @@ header {
   }
 }
 
-.tags-container {
-  max-width: 300px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-  color: $text-color-primary;
-  padding: 10px;
-  display: none;
-  border-radius: 5px;
-  width: max-content;
+#tags-container {
 
-  #tags-value {
-    width: auto;
+  display: flex;
+  gap: 20px;
+  .tags-item {
+    max-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    color: $text-color-primary;
+    padding: 10px;
+    border-radius: 5px;
+    width: max-content;
+
+    #tags-value {
+      width: auto;
+    }
+
+    .tags-closed {
+      cursor: pointer;
+    }
   }
-  .tags-closed {
-    cursor: pointer;
-  }
+
+
 }
 
 .recipes-container {

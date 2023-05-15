@@ -1,11 +1,12 @@
 import getAllRecipeInfo from './functions.js'
 
 const filtered = (recipes) => {
-    const { ingredients, ustensils, appliances } = getAllRecipeInfo(recipes);
+    const { ingredients, appliances, ustensils } = getAllRecipeInfo(recipes);
     const cardsContainer = document.querySelector(".recipes-container");
 
+    console.log(ustensils);
+
     const handleDropdownChange = (event) => {
-   
 
         const dropdownType = extractDropdownType(event.target);
 
@@ -25,13 +26,13 @@ const filtered = (recipes) => {
                 const filteredIngredients = ingredients.filter(value => value.toLowerCase().includes(enterValue));
                 dropdownContent.innerHTML = generateDropdownHTML(filteredIngredients);
                 break;
-            case 'ustensiles':
-                const filteredUstensils = ustensils.filter(value => value.toLowerCase().includes(enterValue));
-                dropdownContent.innerHTML = generateDropdownHTML(filteredUstensils);
-                break;
             case 'appareils':
                 const filteredAppliances = appliances.filter(value => value.toLowerCase().includes(enterValue));
                 dropdownContent.innerHTML = generateDropdownHTML(filteredAppliances);
+                break;
+            case 'ustensiles':
+                const filteredUstensils = ustensils.filter(value => value.toLowerCase().includes(enterValue));
+                dropdownContent.innerHTML = generateDropdownHTML(filteredUstensils);
                 break;
             default:
                 RecipesService.filterByInput(recipes, cardsContainer)
@@ -44,13 +45,23 @@ const filtered = (recipes) => {
         if (!liTag) return;
 
         const valueClicked = liTag.innerHTML.toLowerCase();
-        const tag = document.querySelector(".tags-container");
-        const tagValue = document.getElementById("tags-value");
-        const tagClosed = document.querySelector(".tags-closed");
-        tagValue.innerText = valueClicked;
-        tag.classList.add("show");
+        const tagContainer = document.getElementById("tags-container");
 
-        // Add background color Tag by name dropdown
+        const createTagElement = (value) => {
+            const tagElement = document.createElement("div");
+            tagElement.classList.add("tags-item");
+            tagElement.innerHTML = `
+            <p id="tags-value">${value}</p>
+            <div><i class="fa-regular fa-circle-xmark tags-closed"></i></div>
+          `;
+            return tagElement;
+        };
+
+        const tagValue = valueClicked;
+        const tagElement = createTagElement(tagValue);
+        tagContainer.appendChild(tagElement);
+        const tagClosed = tagElement.querySelector(".tags-closed");
+
         const colors = {
             ingredients: '#3282F7',
             appareils: '#68D9A4',
@@ -59,7 +70,7 @@ const filtered = (recipes) => {
 
         const dropdownType = extractDropdownType(e.target);
         if (dropdownType in colors) {
-            tag.style.backgroundColor = colors[dropdownType];
+            tagElement.style.backgroundColor = colors[dropdownType];
         }
 
         const filteredRecipes = recipes.filter((recipe) => {
@@ -69,24 +80,29 @@ const filtered = (recipes) => {
             const ingredientMatches = recipe.ingredients.some((ingredient) =>
                 ingredient.ingredient.toLowerCase().includes(valueClicked)
             );
-            return fields.some((field) => field.includes(valueClicked)) || ingredientMatches;
+            const ustensilstMatches = recipe.ustensils.some((ustensil) =>
+                ustensil.toLowerCase().includes(valueClicked)
+            );
+            return fields.some((field) => field.includes(valueClicked)) || ingredientMatches || ustensilstMatches;
         });
 
         cardsContainer.innerHTML = new RecipesCard(filteredRecipes).createCards();
 
         tagClosed.addEventListener("click", () => {
+            tagElement.remove();
             cardsContainer.innerHTML = new RecipesCard(recipes).createCards();
-            tag.classList.remove("show");
         });
     };
+
     document.addEventListener("input", handleDropdownChange);
     document.addEventListener("click", tags);
 
 
     const extractDropdownType = (element) => {
         const dropdownClass = element.classList.value;
-      return dropdownClass.split('-')[2];
-      };
+        return dropdownClass.split('-')[2];
+    };
+
 
 };
 

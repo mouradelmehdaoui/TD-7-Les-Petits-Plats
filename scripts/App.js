@@ -19,7 +19,7 @@ class App {
         const allRecipes = await this.ReceiptService.getAllReceipts()
         this.$cardsContainer.innerHTML = new RecipesCard(allRecipes).createCards();
         RecipesService.filterByInput(allRecipes, this.$inputSearch, this.$cardsContainer)
-
+               
         const { ingredients, appliances, ustensils } = getAllRecipeInfo(allRecipes);
         filtered(allRecipes);
 

@@ -1,4 +1,5 @@
 const getAllRecipeInfo = (recipes) => {
+
   const info = {
     ingredients: new Set(),
     ustensils: new Set(),
@@ -11,10 +12,10 @@ const getAllRecipeInfo = (recipes) => {
     });
 
     recipe.ustensils.forEach((ustensil) => {
-      info.ustensils.add(ustensil);
+      info.ustensils.add(ustensil.toLowerCase());
     });
 
-    info.appliances.add(recipe.appliance);
+    info.appliances.add(recipe.appliance.toLowerCase());
   });
 
   return {
