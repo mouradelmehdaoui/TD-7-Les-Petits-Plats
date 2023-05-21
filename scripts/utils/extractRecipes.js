@@ -1,4 +1,4 @@
-export function getAllRecipeInfo (recipes) {
+export function extractRecipes(recipes) {
 
   const info = {
     ingredients: new Set(),
@@ -24,6 +24,21 @@ export function getAllRecipeInfo (recipes) {
     appliances: [...info.appliances],
   };
 };
+
+export const extractArrays = (recipes, objectProperty) => {
+
+  recipes = [].concat(
+    ...recipes.map((recipe) => {
+      let valueOfProperty = recipe[objectProperty];
+      return valueOfProperty;
+    })
+  );
+
+  return [...new Set(recipes)];
+};
+
+
+
 
 export function recipesFound(array) {
   const result = document.querySelector(".recipes-found-paragraph");

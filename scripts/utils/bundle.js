@@ -14,11 +14,13 @@ const toggleCategory = (category) => {
     dropDwonClosed.classList.toggle('closed')
     dropdownArrow.classList.toggle('open')
     dropMenu.classList.toggle('expend', !isOpen)
+
     if (!isOpen) {
       dropdownInput.placeholder = 'Rechercher un '+ category;
       dropdownTitle.replaceWith(dropdownInput);
     } else {
-      dropdownInput.replaceWith(dropdownTitle);;
+      dropdownInput.replaceWith(dropdownTitle);
+      dropdownInput.value = "";
     }
   })
 
