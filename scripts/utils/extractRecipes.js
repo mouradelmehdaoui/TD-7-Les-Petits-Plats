@@ -46,6 +46,8 @@ export function recipesFound(array) {
   if (array.length > 0) {
     result.innerHTML = `Résultat trouvé(s):<span class="fw-bold"> ${array.length}</span>`;
     result.classList.remove("hide");
+  } else if(array.length === 0) {
+    result.innerHTML = `Résultat trouvé(s):<span class="fw-bold"> 0 </span>`;
   } else {
     result.classList.add("hide");
   }
