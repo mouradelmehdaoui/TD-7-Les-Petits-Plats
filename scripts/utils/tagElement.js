@@ -2,12 +2,12 @@ import { generateRecipesItems } from './filtered.js';
 import { generateDropdownContent } from './filtered.js';
 import { filtered } from './filtered.js';
 import { extractRecipes } from './extractRecipes.js'
+import { recipesFound } from './extractRecipes.js'
 
 let tagsClicked = [];
 
 let arrayOfItemsFilteredByUser = [];
 let arrayOfRecipesOrFiltered = [];
-
 let arrayOfItemsFilteredByUserClosed = []
 
 export const createTag = (e, arrayOfRecipes, _cardsContainer) => {
@@ -40,9 +40,10 @@ export const createTag = (e, arrayOfRecipes, _cardsContainer) => {
 
 
     arrayOfItemsFilteredByUser = generateRecipesItems(arrayOfRecipes, tagsClicked, _cardsContainer);
-    console.log(arrayOfItemsFilteredByUser);
+    recipesFound(arrayOfItemsFilteredByUser )
+    
     arrayOfRecipesOrFiltered = filtered(arrayOfItemsFilteredByUser);
-
+  
     // Supprimer tag after clicked
     const tagClosed = tagElement.querySelector(".tags-closed");
     tagClosed.addEventListener("click", () => {
@@ -52,15 +53,14 @@ export const createTag = (e, arrayOfRecipes, _cardsContainer) => {
         if (index !== -1) {
             tagsClicked.splice(index, 1);
             arrayOfItemsFilteredByUserClosed = generateRecipesItems(arrayOfRecipes, tagsClicked, _cardsContainer)
+            recipesFound(arrayOfItemsFilteredByUserClosed)
             if (dropdownType != null) {
-                //generateDropdownContent(arrayOfRecipes, dropdownType, tagsClicked)
                 filtered(arrayOfItemsFilteredByUserClosed);
             }
             if (tagsClicked.length === 0) { _cardsContainer.innerHTML = new RecipesCard(arrayOfRecipes).createCards(); }
         }
     });
 
-    return tagsClicked
 };
 
 
@@ -88,6 +88,7 @@ export const createTagElement = (value) => {
 
 export const extractDropdownType = (element) => {
     const dropdownClass = element.classList.value;
+
     const dropdownType = dropdownClass.split('-')[2];
     let filteredDropdown = ''
     switch (dropdownType) {
