@@ -1,12 +1,9 @@
 import { extractRecipes } from './utils/extractRecipes.js'
-import { extractArrays } from './utils/extractRecipes.js'
 import toggleCategory from '../scripts/utils/bundle.js'
 import { generateDropdownContent } from '../scripts/utils/filtered.js'
-import { generateRecipesItems } from '../scripts/utils/filtered.js'
-import { filtered } from '../scripts/utils/filtered.js'
+import { searchMain } from './utils/searchMain.js'
 import { createTag } from '../scripts/utils/tagElement.js'
 import { extractDropdownType } from '../scripts/utils/tagElement.js'
-
 
 
 
@@ -22,7 +19,6 @@ class App {
 
     async main() {
 
-        //localStorage.clear();
         // recuepration des recettes et les affichées
         const recipes = await this.RecipesService.getAllReceipts()
         this.$cardsContainer.innerHTML = new RecipesCard(recipes).createCards();
@@ -47,31 +43,20 @@ class App {
 }
 
 //Launching the app
-const launchApp = new App().main();
+const initApp = new App().main();
 
-localStorage.clear();
 let arrayOfRecipes = [];
-// let arrayOfIngredients = [];
-// let arrayOfAppliances = [];
-// let arrayOfUtensils = [];
-let arrayOfItemsSearchedByUser = [];
-let arrayOfItemsFilteredByUser = [];
-let arrayOfRecipesOrFiltered = [];
-let tagsTextArray = [];
+let filteredRecipesArray = [];
+
 const $inputSearch = document.querySelector('.searchInput');
 const _cardsContainer = document.querySelector(".recipes-container");
 
-launchApp.then((recipes) => {
+initApp.then((recipes) => {
 
     arrayOfRecipes = recipes;
-    // arrayOfIngredients = extractArrays(recipes, 'ingredients');
-    // arrayOfAppliances = extractArrays(recipes, 'appliance');
-    // arrayOfUtensils = extractArrays(recipes, 'ustensils');
-
     addEventListeners()
 
 });
-
 
 function addEventListeners() {
     $inputSearch.addEventListener("input", searchRecipes);
@@ -79,28 +64,17 @@ function addEventListeners() {
     document.addEventListener("click", getTags);
 }
 
-
-function searchRecipes(e) {
-
-    const enterValue = e.target.value.toLowerCase()
-    if (enterValue.length >= 2) {
-        const filteredRecipes = arrayOfRecipes.filter((recipe) => {
-            const nameMatch = recipe.name.toLowerCase().includes(enterValue);
-            const descriptionMatch = recipe.description.toLowerCase().includes(enterValue);
-            const ingredientMatches =
-                recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(enterValue));
-            return nameMatch || descriptionMatch || ingredientMatches;
+function searchRecipes() {   
+    return new Promise((resolve) => { // Create a promise
+        searchMain(arrayOfRecipes, $inputSearch, _cardsContainer, (filteredRecipes) => {
+          filteredRecipesArray = filteredRecipes;
+          resolve(filteredRecipesArray); // Resolve the promise with the filtered recipes
         });
-        _cardsContainer.innerHTML = new RecipesCard(filteredRecipes).createCards();
-        filtered(filteredRecipes);
-
-        arrayOfItemsSearchedByUser = filteredRecipes
-        return arrayOfItemsSearchedByUser
-    } else {
-        filtered(arrayOfRecipes)
-        return arrayOfRecipes
-    }
-
+      }).then((filteredRecipes) => {
+        // Access filtered recipes here
+        console.log(filteredRecipesArray);
+        // Use the filtered recipes as needed
+      });
 }
 
 const handleDropdownChange = (event) => {
@@ -110,8 +84,11 @@ const handleDropdownChange = (event) => {
 };
 
 const getTags = (e) => {
-    createTag(e, arrayOfRecipes, _cardsContainer);
+
+   const array = filteredRecipesArray.length === 0 ? arrayOfRecipes : filteredRecipesArray
+    createTag(e, array, _cardsContainer);
 };
+
 
 
 
