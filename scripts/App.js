@@ -3,9 +3,10 @@ import { extractArrays } from './utils/extractRecipes.js'
 import toggleCategory from '../scripts/utils/bundle.js'
 import { generateDropdownContent } from '../scripts/utils/filtered.js'
 import { generateRecipesItems } from '../scripts/utils/filtered.js'
-import { searchMain } from './utils/searchMain.js'
+import { filtered } from '../scripts/utils/filtered.js'
 import { createTag } from '../scripts/utils/tagElement.js'
 import { extractDropdownType } from '../scripts/utils/tagElement.js'
+
 
 
 
@@ -50,11 +51,12 @@ const launchApp = new App().main();
 
 localStorage.clear();
 let arrayOfRecipes = [];
-let arrayOfIngredients = [];
-let arrayOfAppliances = [];
-let arrayOfUtensils = [];
+// let arrayOfIngredients = [];
+// let arrayOfAppliances = [];
+// let arrayOfUtensils = [];
 let arrayOfItemsSearchedByUser = [];
 let arrayOfItemsFilteredByUser = [];
+let arrayOfRecipesOrFiltered = [];
 let tagsTextArray = [];
 const $inputSearch = document.querySelector('.searchInput');
 const _cardsContainer = document.querySelector(".recipes-container");
@@ -62,11 +64,12 @@ const _cardsContainer = document.querySelector(".recipes-container");
 launchApp.then((recipes) => {
 
     arrayOfRecipes = recipes;
-    arrayOfIngredients = extractArrays(recipes, 'ingredients');
-    arrayOfAppliances = extractArrays(recipes, 'appliance');
-    arrayOfUtensils = extractArrays(recipes, 'ustensils');
+    // arrayOfIngredients = extractArrays(recipes, 'ingredients');
+    // arrayOfAppliances = extractArrays(recipes, 'appliance');
+    // arrayOfUtensils = extractArrays(recipes, 'ustensils');
 
     addEventListeners()
+
 });
 
 
@@ -77,21 +80,37 @@ function addEventListeners() {
 }
 
 
-function searchRecipes(event) {
-    searchMain(arrayOfRecipes, $inputSearch, _cardsContainer)
+function searchRecipes(e) {
+
+    const enterValue = e.target.value.toLowerCase()
+    if (enterValue.length >= 2) {
+        const filteredRecipes = arrayOfRecipes.filter((recipe) => {
+            const nameMatch = recipe.name.toLowerCase().includes(enterValue);
+            const descriptionMatch = recipe.description.toLowerCase().includes(enterValue);
+            const ingredientMatches =
+                recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(enterValue));
+            return nameMatch || descriptionMatch || ingredientMatches;
+        });
+        _cardsContainer.innerHTML = new RecipesCard(filteredRecipes).createCards();
+        filtered(filteredRecipes);
+
+        arrayOfItemsSearchedByUser = filteredRecipes
+        return arrayOfItemsSearchedByUser
+    } else {
+        filtered(arrayOfRecipes)
+        return arrayOfRecipes
+    }
+
 }
 
 const handleDropdownChange = (event) => {
     const dropdownType = extractDropdownType(event.target);
     const enterValue = event.target.value.toLowerCase();
     generateDropdownContent(arrayOfRecipes, dropdownType, enterValue)
-
 };
 
 const getTags = (e) => {
-
-    tagsTextArray = createTag(e, arrayOfRecipes, _cardsContainer);
-    generateRecipesItems(arrayOfRecipes, tagsTextArray, _cardsContainer)
+    createTag(e, arrayOfRecipes, _cardsContainer);
 };
 
 

@@ -1,15 +1,35 @@
 import { generateRecipesItems } from './filtered.js';
+import { generateDropdownContent } from './filtered.js';
+import { filtered } from './filtered.js';
+import { extractRecipes } from './extractRecipes.js'
 
 let tagsClicked = [];
 
-export const createTag = (e, arrayOfRecipes,  _cardsContainer) => {
+let arrayOfItemsFilteredByUser = [];
+let arrayOfRecipesOrFiltered = [];
+
+let arrayOfItemsFilteredByUserClosed = []
+
+export const createTag = (e, arrayOfRecipes, _cardsContainer) => {
     // récupération valeur cliquer pour le tag
     const liTag = e.target.closest("LI");
     if (!liTag) return;
 
     // création du tag dans le DOM
     const valueClicked = liTag.innerHTML.toLowerCase();
+
+    if (valueClicked) {
+        const found = tagsClicked.indexOf(valueClicked)
+        if (found != -1) {
+            return
+        } else {
+            // add tag clicked and dropdown type in array
+            tagsClicked.push(valueClicked);
+        }
+    }
+
     const tagContainer = document.getElementById("tags-container");
+
     const tagElement = createTagElement(valueClicked);
     tagContainer.appendChild(tagElement);
     // extraction du category recette du dropdown 
@@ -18,20 +38,25 @@ export const createTag = (e, arrayOfRecipes,  _cardsContainer) => {
     // ajouter la couleur du tag dans le DOM
     applyColorToTagElement(tagElement, dropdownType);
 
-    // add tag clicked and dropdown type in array
-    tagsClicked.push(valueClicked);
+
+    arrayOfItemsFilteredByUser = generateRecipesItems(arrayOfRecipes, tagsClicked, _cardsContainer);
+    console.log(arrayOfItemsFilteredByUser);
+    arrayOfRecipesOrFiltered = filtered(arrayOfItemsFilteredByUser);
 
     // Supprimer tag after clicked
     const tagClosed = tagElement.querySelector(".tags-closed");
     tagClosed.addEventListener("click", () => {
+
         tagElement.remove();
         const index = tagsClicked.indexOf(valueClicked);
         if (index !== -1) {
             tagsClicked.splice(index, 1);
-
-            console.log(tagsClicked);
-
-            generateRecipesItems(arrayOfRecipes, tagsClicked, _cardsContainer)
+            arrayOfItemsFilteredByUserClosed = generateRecipesItems(arrayOfRecipes, tagsClicked, _cardsContainer)
+            if (dropdownType != null) {
+                //generateDropdownContent(arrayOfRecipes, dropdownType, tagsClicked)
+                filtered(arrayOfItemsFilteredByUserClosed);
+            }
+            if (tagsClicked.length === 0) { _cardsContainer.innerHTML = new RecipesCard(arrayOfRecipes).createCards(); }
         }
     });
 
@@ -63,6 +88,20 @@ export const createTagElement = (value) => {
 
 export const extractDropdownType = (element) => {
     const dropdownClass = element.classList.value;
-    return dropdownClass.split('-')[2];
+    const dropdownType = dropdownClass.split('-')[2];
+    let filteredDropdown = ''
+    switch (dropdownType) {
+        case 'ingredients':
+            filteredDropdown = 'ingredients';
+            return filteredDropdown;
+        case 'appareils':
+            filteredDropdown = 'appareils';
+            return filteredDropdown;
+        case 'ustensiles':
+            filteredDropdown = 'ustensiles';
+            return filteredDropdown;
+        default:
+            return null; // or return null;
+    }
 };
 

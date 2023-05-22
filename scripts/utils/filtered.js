@@ -19,8 +19,18 @@ const updateDropdownContent = (filteredItems, dropdownType) => {
   return filteredItems;
 };
 
-export const generateDropdownContent = (array, dropdownType, enterValue) => {
+export const generateDropdownContent = (array, dropdownType, values) => {
   const { ingredients, appliances, ustensils } = extractRecipes(array);
+
+  console.log(dropdownType);
+  let enterValue = '';
+  if(Array.isArray(values)) {
+    enterValue  = values.join(", ");
+  } else {
+    enterValue = values;
+  }
+
+  console.log(enterValue);
 
   switch (dropdownType) {
     case 'ingredients':
@@ -63,19 +73,48 @@ export const generateRecipesItems = (recipes, tags, cardsContainer) => {
         return ingredientMatches || ustensilsMatches || applianceMatches;
       });
       cardsContainer.innerHTML = new RecipesCard(filteredRecipes).createCards();
-      return filteredRecipes;
       }
-  
+      
   }) 
-} else {
-  cardsContainer.innerHTML = new RecipesCard(recipes).createCards();
+  return filteredRecipes;
+} 
 }
+
+
+export const filtered = (recipes) => {
+
+  const { ingredients, ustensils, appliances } = extractRecipes(recipes);
+  const categories = ['ingredients', 'appareils', 'ustensiles'];
+
+  let filteredItems = [];
+
+  categories.forEach(category => {
+    let dropdownContent = document.querySelector(`.dropdown-option-${category}`);
+    const generateDropdownHTML = (filteredItems) => {
+      let dropdownHTML = "";
+      filteredItems.forEach(item => {
+        dropdownHTML += `<li class="dropdown-item-${category}">${item}</li>`;
+      });
+      return dropdownHTML;
+    }
+
+    if (category === 'ingredients') {
+      filteredItems = ingredients.filter(value => value);
+
+    } else if (category === 'appareils') {
+      filteredItems = appliances.filter(value => value);
+      
+    } else if (category === 'ustensiles') {
+      filteredItems = ustensils.filter(value => value);
+     
+    }
+    dropdownContent.innerHTML = generateDropdownHTML(filteredItems);
+   
+  });
+
+  return filteredItems
+
 }
-
-
-
-
-
 
 
 
