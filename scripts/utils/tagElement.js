@@ -1,14 +1,11 @@
 import { generateRecipesItems } from './filtered.js';
-import { generateDropdownContent } from './filtered.js';
 import { filtered } from './filtered.js';
-import { extractRecipes } from './extractRecipes.js'
 import { recipesFound } from './extractRecipes.js'
 
 let tagsClicked = [];
 
 let arrayOfItemsFilteredByUser = [];
 let arrayOfRecipesOrFiltered = [];
-let arrayOfItemsFilteredByUserClosed = []
 
 export const createTag = (e, arrayOfRecipes, _cardsContainer) => {
     // récupération valeur cliquer pour le tag
@@ -43,7 +40,7 @@ export const createTag = (e, arrayOfRecipes, _cardsContainer) => {
     recipesFound(arrayOfItemsFilteredByUser )
     
     arrayOfRecipesOrFiltered = filtered(arrayOfItemsFilteredByUser);
-  
+
     // Supprimer tag after clicked
     const tagClosed = tagElement.querySelector(".tags-closed");
     tagClosed.addEventListener("click", () => {
@@ -52,15 +49,18 @@ export const createTag = (e, arrayOfRecipes, _cardsContainer) => {
         const index = tagsClicked.indexOf(valueClicked);
         if (index !== -1) {
             tagsClicked.splice(index, 1);
-            arrayOfItemsFilteredByUserClosed = generateRecipesItems(arrayOfRecipes, tagsClicked, _cardsContainer)
-            recipesFound(arrayOfItemsFilteredByUserClosed)
+            arrayOfItemsFilteredByUser = generateRecipesItems(arrayOfRecipes, tagsClicked, _cardsContainer)
+            recipesFound(arrayOfItemsFilteredByUser)
+
             if (dropdownType != null) {
-                filtered(arrayOfItemsFilteredByUserClosed);
+                filtered(arrayOfItemsFilteredByUser);
             }
-            if (tagsClicked.length === 0) { _cardsContainer.innerHTML = new RecipesCard(arrayOfRecipes).createCards(); }
+            if (tagsClicked.length === 0) { 
+                _cardsContainer.innerHTML = new RecipesCard(arrayOfRecipes).createCards();
+            } 
         }
     });
-
+    return arrayOfItemsFilteredByUser;
 };
 
 

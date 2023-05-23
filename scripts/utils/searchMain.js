@@ -1,10 +1,9 @@
 import { recipesFound } from './extractRecipes.js'
 import { filtered } from './filtered.js';
-import { createTag } from './tagElement.js';
-
 
 export function searchMain(recipes, input, cardsContainer, callback) {
 
+  console.log('je suis la', recipes);
   const myFunction = (e) => {
     let filteredRecipes = recipes;
     const enterValue = e.target.value.toLowerCase()
@@ -20,13 +19,13 @@ export function searchMain(recipes, input, cardsContainer, callback) {
       filtered(filteredRecipes);
       recipesFound(filteredRecipes)
 
-
       //return filteredRecipes
     } else {
       filtered(recipes)
       recipesFound(recipes)
       //return filteredRecipes
     }
+
     callback(filteredRecipes);
   }
   input.addEventListener("input", myFunction);

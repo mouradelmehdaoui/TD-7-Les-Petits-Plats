@@ -1,9 +1,11 @@
 import { extractRecipes } from './utils/extractRecipes.js'
+import { recipesFound } from './utils/extractRecipes.js'
 import toggleCategory from '../scripts/utils/bundle.js'
 import { generateDropdownContent } from '../scripts/utils/filtered.js'
 import { searchMain } from './utils/searchMain.js'
 import { createTag } from '../scripts/utils/tagElement.js'
 import { extractDropdownType } from '../scripts/utils/tagElement.js'
+
 
 
 
@@ -47,6 +49,8 @@ const initApp = new App().main();
 
 let arrayOfRecipes = [];
 let filteredRecipesArray = [];
+let arrayOfRecipesOrFiltered = [];
+let arrayOfSearch = [];
 
 const $inputSearch = document.querySelector('.searchInput');
 const _cardsContainer = document.querySelector(".recipes-container");
@@ -59,22 +63,30 @@ initApp.then((recipes) => {
 });
 
 function addEventListeners() {
-    $inputSearch.addEventListener("input", searchRecipes);
+    $inputSearch.addEventListener("input", () => searchRecipes(arrayOfRecipes));
     document.addEventListener("input", handleDropdownChange);
     document.addEventListener("click", getTags);
 }
 
-function searchRecipes() {   
-    return new Promise((resolve) => { // Create a promise
+function searchRecipes(arrayOfRecipes) {
+
+    //let recipesToSearch = arrayOfRecipesOrFiltered.length > 0 ? arrayOfRecipesOrFiltered : arrayOfRecipes;
+
+
+    return new Promise((resolve) => {
+
+        // Create a promise
         searchMain(arrayOfRecipes, $inputSearch, _cardsContainer, (filteredRecipes) => {
-          filteredRecipesArray = filteredRecipes;
-          resolve(filteredRecipesArray); // Resolve the promise with the filtered recipes
+
+            filteredRecipesArray = filteredRecipes;
+            resolve(filteredRecipesArray); // Resolve the promise with the filtered recipes
         });
-      }).then((filteredRecipes) => {
+    }).then((filteredRecipes) => {
         // Access filtered recipes here
-        console.log(filteredRecipesArray);
         // Use the filtered recipes as needed
-      });
+        console.log( filteredRecipesArray);
+        return filteredRecipesArray; 
+    });
 }
 
 const handleDropdownChange = (event) => {
@@ -85,8 +97,20 @@ const handleDropdownChange = (event) => {
 
 const getTags = (e) => {
 
-   const array = filteredRecipesArray.length === 0 ? arrayOfRecipes : filteredRecipesArray
-    createTag(e, array, _cardsContainer);
+    const array = filteredRecipesArray.length === 0 ? arrayOfRecipes : filteredRecipesArray
+    
+    const result =  createTag(e, array, _cardsContainer);
+
+    if (result) {
+        result.forEach(item => {
+            if (!arrayOfRecipesOrFiltered.some(existingItem => existingItem.id === item.id)) {
+                arrayOfRecipesOrFiltered.push(item);
+            }
+        });
+    }
+    console.log(result);
+    if(result){recipesFound(result)};
+   
 };
 
 
