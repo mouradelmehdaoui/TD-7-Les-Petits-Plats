@@ -7,7 +7,10 @@ export function searchMain(recipes, input, cardsContainer, lastSearchInput, call
 
   const myFunction = () => {
     enterValue = input.value.toLowerCase().trim();
-    const tags = Array.from(document.querySelectorAll(".tags")).map(tag => tag.textContent.toLowerCase().trim());
+    const tags = Array.from(document.querySelectorAll(".tags"))
+      .map(tag => tag.textContent.toLowerCase().trim())
+      .flatMap(tag => tag.split(/\s*\n\s*/));
+
 
     if (enterValue.length >= 2 || tags.length > 0) {
       filteredRecipes = recipes.filter((recipe) => {
