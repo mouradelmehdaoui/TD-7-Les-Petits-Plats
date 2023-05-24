@@ -50,7 +50,7 @@ const initApp = new App().main();
 let arrayOfRecipes = [];
 let filteredRecipesArray = [];
 let arrayOfRecipesOrFiltered = [];
-let arrayOfSearch = [];
+let lastSearchInput
 
 const $inputSearch = document.querySelector('.searchInput');
 const _cardsContainer = document.querySelector(".recipes-container");
@@ -69,25 +69,26 @@ function addEventListeners() {
 }
 
 function searchRecipes(arrayOfRecipes) {
-
-    //let recipesToSearch = arrayOfRecipesOrFiltered.length > 0 ? arrayOfRecipesOrFiltered : arrayOfRecipes;
-
-
     return new Promise((resolve) => {
-
-        // Create a promise
-        searchMain(arrayOfRecipes, $inputSearch, _cardsContainer, (filteredRecipes) => {
-
-            filteredRecipesArray = filteredRecipes;
-            resolve(filteredRecipesArray); // Resolve the promise with the filtered recipes
-        });
+      searchMain(
+        arrayOfRecipes,
+        $inputSearch,
+        _cardsContainer,
+        lastSearchInput,
+        (filteredRecipes, enterValue) => {
+          filteredRecipesArray = filteredRecipes;
+          lastSearchInput = enterValue; // Update the last search input
+          resolve(filteredRecipesArray); // Resolve the promise with the filtered recipes
+        }
+      );
     }).then((filteredRecipes) => {
-        // Access filtered recipes here
-        // Use the filtered recipes as needed
-        console.log( filteredRecipesArray);
-        return filteredRecipesArray; 
+      // Access filtered recipes here
+      // Use the filtered recipes as needed
+      console.log(filteredRecipesArray);
+      return filteredRecipesArray;
     });
-}
+  }
+  
 
 const handleDropdownChange = (event) => {
     const dropdownType = extractDropdownType(event.target);
