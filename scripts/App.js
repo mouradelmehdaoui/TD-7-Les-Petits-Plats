@@ -1,12 +1,9 @@
 import { extractRecipes } from './utils/extractRecipes.js'
-import { recipesFound } from './utils/extractRecipes.js'
 import toggleCategory from '../scripts/utils/bundle.js'
 import { generateDropdownContent } from '../scripts/utils/filtered.js'
 import { searchMain } from './utils/searchMain.js'
 import { createTag } from '../scripts/utils/tagElement.js'
 import { extractDropdownType } from '../scripts/utils/tagElement.js'
-
-
 
 
 class App {
@@ -47,9 +44,9 @@ class App {
 //Launching the app
 const initApp = new App().main();
 
+// declaration Array needed
 let arrayOfRecipes = [];
 let filteredRecipesArray = [];
-let arrayOfRecipesOrFiltered = [];
 let lastSearchInput
 
 const $inputSearch = document.querySelector('.searchInput');
@@ -63,32 +60,35 @@ initApp.then((recipes) => {
 });
 
 function addEventListeners() {
-    $inputSearch.addEventListener("input", () => searchRecipes(arrayOfRecipes));
+
+    $inputSearch.addEventListener("input", () => {
+        if ($inputSearch.value.length >= 2) {
+            searchRecipes(arrayOfRecipes);
+        }
+    });
+
     document.addEventListener("input", handleDropdownChange);
     document.addEventListener("click", getTags);
 }
 
+
 function searchRecipes(arrayOfRecipes) {
     return new Promise((resolve) => {
-      searchMain(
-        arrayOfRecipes,
-        $inputSearch,
-        _cardsContainer,
-        lastSearchInput,
-        (filteredRecipes, enterValue) => {
-          filteredRecipesArray = filteredRecipes;
-          lastSearchInput = enterValue; // Update the last search input
-          resolve(filteredRecipesArray); // Resolve the promise with the filtered recipes
-        }
-      );
-    }).then((filteredRecipes) => {
-      // Access filtered recipes here
-      // Use the filtered recipes as needed
-      console.log(filteredRecipesArray);
-      return filteredRecipesArray;
-    });
-  }
-  
+
+        searchMain(
+            arrayOfRecipes,
+            $inputSearch,
+            _cardsContainer,
+            lastSearchInput,
+            (filteredRecipes, enterValue) => {
+                filteredRecipesArray = filteredRecipes;
+                lastSearchInput = enterValue; // Update the last search input
+                resolve(filteredRecipesArray); // Resolve the promise with the filtered recipes
+            }
+        );
+    })
+}
+
 
 const handleDropdownChange = (event) => {
     const dropdownType = extractDropdownType(event.target);
@@ -97,21 +97,8 @@ const handleDropdownChange = (event) => {
 };
 
 const getTags = (e) => {
-
     const array = filteredRecipesArray.length === 0 ? arrayOfRecipes : filteredRecipesArray
-    
-    const result =  createTag(e, array, _cardsContainer);
-
-    if (result) {
-        result.forEach(item => {
-            if (!arrayOfRecipesOrFiltered.some(existingItem => existingItem.id === item.id)) {
-                arrayOfRecipesOrFiltered.push(item);
-            }
-        });
-    }
-    console.log(result);
-    if(result){recipesFound(result)};
-   
+    createTag(e, array, _cardsContainer, $inputSearch);
 };
 
 

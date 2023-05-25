@@ -1,6 +1,5 @@
 import { extractRecipes } from './extractRecipes.js'
 
-
 const generateDropdownHTML = (filteredItems, dropdownType) => {
   let dropdownHTML = "";
   filteredItems.forEach(item => {

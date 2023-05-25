@@ -7,7 +7,7 @@ let tagsClicked = [];
 let arrayOfItemsFilteredByUser = [];
 let arrayOfRecipesOrFiltered = [];
 
-export const createTag = (e, arrayOfRecipes, _cardsContainer) => {
+export const createTag = (e, arrayOfRecipes, _cardsContainer, input) => {
     // récupération valeur cliquer pour le tag
     const liTag = e.target.closest("LI");
     if (!liTag) return;
@@ -56,7 +56,25 @@ export const createTag = (e, arrayOfRecipes, _cardsContainer) => {
                 filtered(arrayOfItemsFilteredByUser);
             }
             if (tagsClicked.length === 0) { 
-                _cardsContainer.innerHTML = new RecipesCard(arrayOfRecipes).createCards();
+                if(input.value){
+
+                   const filteredRecipes = arrayOfRecipes.filter((recipe) => {
+                        const nameMatch = recipe.name.toLowerCase().includes(input.value);
+                        const descriptionMatch = recipe.description.toLowerCase().includes(input.value);
+                        const ingredientMatches =
+                          recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(input.value));
+                        return nameMatch || descriptionMatch || ingredientMatches;
+                      });
+                
+                      _cardsContainer.innerHTML = new RecipesCard(filteredRecipes).createCards();
+                     
+                      filtered(filteredRecipes)
+                      recipesFound(filteredRecipes)
+                }else  {
+                    _cardsContainer.innerHTML = new RecipesCard(arrayOfRecipes).createCards();
+                    recipesFound(arrayOfRecipes)
+                }
+               
             } 
         }
     });

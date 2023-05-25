@@ -4,15 +4,17 @@ import { filtered } from './filtered.js';
 export function searchMain(recipes, input, cardsContainer, lastSearchInput, callback) {
   let filteredRecipes = recipes; // Initialize filtered recipes with all recipes
   let enterValue = lastSearchInput; // Set enterValue to the last search input
+  let timerId = null; // Timer ID for debounce
 
   const myFunction = () => {
+
     enterValue = input.value.toLowerCase().trim();
     const tags = Array.from(document.querySelectorAll(".tags"))
       .map(tag => tag.textContent.toLowerCase().trim())
       .flatMap(tag => tag.split(/\s*\n\s*/));
 
-
     if (enterValue.length >= 2 || tags.length > 0) {
+
       filteredRecipes = recipes.filter((recipe) => {
         const nameMatch = recipe.name.toLowerCase().includes(enterValue);
         const descriptionMatch = recipe.description.toLowerCase().includes(enterValue);
@@ -41,8 +43,10 @@ export function searchMain(recipes, input, cardsContainer, lastSearchInput, call
     recipesFound(filteredRecipes);
 
     callback(filteredRecipes, enterValue); // Pass filtered recipes and enterValue to the callback function
-  };
 
+    console.log(filteredRecipes);
+  return filteredRecipes;
+};
   input.addEventListener("input", myFunction);
 }
 
